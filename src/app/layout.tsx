@@ -52,6 +52,9 @@ export const metadata: Metadata = {
     icon: '/assets/brand/favicon-32.png',
     apple: '/assets/brand/favicon-180.png',
   },
+  verification: {
+    google: 'YLddo7lnPJOgwf4sosHqYeHlHefEgvnjbNg_ye3pdYw',
+  },
 };
 
 const jsonLd = {
@@ -83,6 +86,7 @@ export default function RootLayout({
   return (
     <html lang="uz">
       <head>
+        <meta name="google-site-verification" content="YLddo7lnPJOgwf4sosHqYeHlHefEgvnjbNg_ye3pdYw" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
