@@ -3,27 +3,22 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
-  Calculator, 
-  Microscope, 
-  BookOpen, 
-  Sparkles, 
-  ArrowRight,
+  Calculator,
+  Microscope,
+  BookOpen,
   GraduationCap,
   Monitor,
   Presentation,
-  FlaskConical,
-  Users
+  FlaskConical
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
 import { ACADEMIC_VIDEOS } from '@/data/mediaData';
 import { MediaCard } from '@/components/MediaCard';
 import { VideoModal } from '@/components/VideoModal';
-import { ApplicationModal } from '@/components/ApplicationModal';
 
 export default function AcademicsPage() {
   const { t } = useTranslation();
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
 
   return (
     <>
@@ -272,66 +267,11 @@ export default function AcademicsPage() {
         </div>
       </section>
 
-      {/* 6. CTA BANNER */}
-      <section className="section">
-        <div className="container">
-          <div
-            style={{
-              padding: 'clamp(32px, 5vw, 56px)',
-              borderRadius: 'var(--radius-l)',
-              background: 'linear-gradient(135deg, var(--blue-900) 0%, var(--blue) 100%)',
-              color: '#fff',
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: '24px',
-              boxShadow: '0 24px 50px -15px rgba(22, 47, 216, 0.4)'
-            }}
-          >
-            <div>
-              <span className="eyebrow" style={{ color: '#9AABFF', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Users size={16} />
-                <span>{t('academics.cta.eyebrow') || "Bu fanlarni kim o'qitishini bilmoqchimisiz?"}</span>
-              </span>
-              <h2 className="display" style={{ color: '#fff', marginTop: '8px' }}>
-                {t('academics.cta.title') || "Pedagoglar jamoasi bilan tanishing"}
-              </h2>
-            </div>
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-              <Link 
-                href="/teachers" 
-                className="btn btn-ghost-light"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-              >
-                <span>{t('academics.cta.btn1') || "O'qituvchilar"}</span>
-                <ArrowRight size={16} />
-              </Link>
-              <button
-                type="button"
-                onClick={() => setApplyModalOpen(true)}
-                className="btn btn-primary"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-              >
-                <Sparkles size={16} />
-                <span>{t('academics.cta.btn2') || "Qabul 2025"}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Lightbox Video Modal */}
       <VideoModal
         src={activeVideo?.src || null}
         title={activeVideo?.title}
         onClose={() => setActiveVideo(null)}
-      />
-
-      {/* Online Application Modal */}
-      <ApplicationModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
       />
     </>
   );

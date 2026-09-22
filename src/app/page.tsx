@@ -2,18 +2,16 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-  Users, 
-  GraduationCap, 
-  Calendar, 
-  Award, 
-  Atom, 
-  Calculator, 
-  BookOpen, 
-  Sparkles, 
-  ArrowRight, 
-  CheckCircle2,
-  FileText,
+import {
+  Users,
+  GraduationCap,
+  Calendar,
+  Award,
+  Atom,
+  Calculator,
+  BookOpen,
+  Sparkles,
+  ArrowRight,
   Monitor,
   Presentation,
   FlaskConical,
@@ -22,23 +20,17 @@ import {
   Activity,
   Coffee,
   Wind,
-  ShieldCheck,
-  Play,
-  MapPin,
   Phone
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
-import { SCHOOL_DATA, TEACHERS_LIST } from '@/data/schoolData';
-import { ACADEMIC_VIDEOS, STUDENT_LIFE_GAMES, TESTIMONIALS } from '@/data/mediaData';
+import { STUDENT_LIFE_GAMES, TESTIMONIALS } from '@/data/mediaData';
 import { StatCard } from '@/components/StatCard';
 import { MediaCard } from '@/components/MediaCard';
 import { VideoModal } from '@/components/VideoModal';
-import { ApplicationModal } from '@/components/ApplicationModal';
 
 export default function Home() {
   const { t } = useTranslation();
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
 
   return (
     <>
@@ -133,15 +125,6 @@ export default function Home() {
                   marginBottom: '40px'
                 }}
               >
-                <button
-                  type="button"
-                  onClick={() => setApplyModalOpen(true)}
-                  className="btn btn-primary"
-                  style={{ padding: '14px 26px', fontSize: '0.98rem', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-                >
-                  <Sparkles size={16} />
-                  <span>{t('header.admissionsBtn') || 'Qabul 2025'}</span>
-                </button>
                 <Link
                   href="/about"
                   className="btn btn-ghost-light"
@@ -149,6 +132,14 @@ export default function Home() {
                 >
                   <span>{t('home.hero.cta1') || 'Maktab haqida'}</span>
                   <ArrowRight size={16} />
+                </Link>
+                <Link
+                  href="/contact#contact-info"
+                  className="btn btn-primary"
+                  style={{ padding: '14px 26px', fontSize: '0.98rem', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <Phone size={16} />
+                  <span>{t('home.hero.cta2') || "Biz bilan bog'lanish"}</span>
                 </Link>
               </div>
 
@@ -613,70 +604,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11. TEACHERS PREVIEW (FIRST 4 TEACHERS) */}
-      <section className="section section-tint">
-        <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px', marginBottom: '40px' }}>
-            <div>
-              <span className="eyebrow">{t('home.teachers.eyebrow') || "Pedagogik jamoa"}</span>
-              <h2 className="display" style={{ marginTop: '12px' }}>
-                {t('home.teachers.title') || "Ustozlar jamoasi bilan tanishing"}
-              </h2>
-            </div>
-            <Link href="/teachers" className="text-link">
-              <span>{t('home.teachers.link') || "Barcha o'qituvchilar"}</span>
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-
-          <div className="grid grid-4">
-            {TEACHERS_LIST.slice(0, 4).map((teacher) => (
-              <div
-                key={teacher.id}
-                className="card"
-                style={{
-                  padding: '24px 20px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  textAlign: 'center'
-                }}
-              >
-                <div
-                  style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(145deg, var(--blue-050) 0%, rgba(22, 47, 216, 0.12) 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--blue)',
-                    marginBottom: '14px',
-                    border: '2px solid rgba(22, 47, 216, 0.18)'
-                  }}
-                >
-                  <Users size={34} strokeWidth={1.8} />
-                </div>
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '6px' }}>{teacher.name}</h3>
-                <span
-                  style={{
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    color: 'var(--blue)',
-                    backgroundColor: 'var(--blue-050)',
-                    padding: '4px 10px',
-                    borderRadius: '999px'
-                  }}
-                >
-                  {t(teacher.subjectKey) || teacher.subjectKey}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 12. FINAL ADMISSIONS & TUITION CTA BANNER */}
       <section className="section">
         <div className="container">
@@ -706,18 +633,6 @@ export default function Home() {
                 {t('home.cta.lede') || "Boquvchisini yo'qotgan bolalar uchun imtiyozli ta'lim beriladi. Shuningdek, a'lochi o'quvchilarga 100 000 dan 500 000 so'mgacha oylik stipendiyalar taqdim etiladi."}
               </p>
             </div>
-
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-              <button
-                type="button"
-                onClick={() => setApplyModalOpen(true)}
-                className="btn btn-ghost-light"
-                style={{ padding: '16px 28px', fontSize: '1.02rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-              >
-                <span>{t('home.cta.btn1') || "Onlayn ariza topshirish"}</span>
-                <ArrowRight size={18} />
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -727,12 +642,6 @@ export default function Home() {
         src={activeVideo?.src || null}
         title={activeVideo?.title}
         onClose={() => setActiveVideo(null)}
-      />
-
-      {/* Online Application Modal */}
-      <ApplicationModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
       />
     </>
   );

@@ -1,19 +1,15 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Send, 
-  Sparkles, 
-  ArrowRight,
-  GraduationCap
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Send
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
 import { SCHOOL_DATA } from '@/data/schoolData';
-import { ApplicationModal } from './ApplicationModal';
 
 const InstagramIcon = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -25,11 +21,9 @@ const InstagramIcon = ({ size = 18 }: { size?: number }) => (
 
 export const Footer: React.FC = () => {
   const { t } = useTranslation();
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
 
   return (
-    <>
-      <footer
+    <footer
         style={{
           backgroundColor: 'var(--blue-950)',
           color: '#D4DAFB',
@@ -115,7 +109,6 @@ export const Footer: React.FC = () => {
               <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <li><Link href="/about" style={{ color: '#C5CEF8', fontSize: '0.92rem', transition: 'color 0.2s' }}>{t('nav.about') || 'Maktab haqida'}</Link></li>
                 <li><Link href="/academics" style={{ color: '#C5CEF8', fontSize: '0.92rem', transition: 'color 0.2s' }}>{t('nav.academics') || 'Fanlar va darslar'}</Link></li>
-                <li><Link href="/teachers" style={{ color: '#C5CEF8', fontSize: '0.92rem', transition: 'color 0.2s' }}>{t('nav.teachers') || 'O\'qituvchilar'}</Link></li>
                 <li><Link href="/student-life" style={{ color: '#C5CEF8', fontSize: '0.92rem', transition: 'color 0.2s' }}>{t('nav.studentlife') || 'Maktab hayoti'}</Link></li>
               </ul>
             </div>
@@ -129,24 +122,6 @@ export const Footer: React.FC = () => {
                 <li><Link href="/achievements" style={{ color: '#C5CEF8', fontSize: '0.92rem', transition: 'color 0.2s' }}>{t('nav.achievements') || 'Yutuqlar'}</Link></li>
                 <li><Link href="/admissions" style={{ color: '#C5CEF8', fontSize: '0.92rem', transition: 'color 0.2s' }}>{t('nav.admissions') || 'Qabul tartibi'}</Link></li>
                 <li><Link href="/contact" style={{ color: '#C5CEF8', fontSize: '0.92rem', transition: 'color 0.2s' }}>{t('nav.contact') || 'Bog\'lanish va Xarita'}</Link></li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => setApplyModalOpen(true)}
-                    style={{ 
-                      color: '#7EA1FF', 
-                      fontWeight: 700, 
-                      fontSize: '0.92rem', 
-                      textAlign: 'left',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '5px'
-                    }}
-                  >
-                    <Sparkles size={14} />
-                    <span>Ariza qoldirish</span>
-                  </button>
-                </li>
               </ul>
             </div>
 
@@ -193,7 +168,7 @@ export const Footer: React.FC = () => {
             }}
           >
             <div>© {new Date().getFullYear()} UNCO School. Barcha huquqlar himoyalangan.</div>
-            <div>Grades 5–11 · Xususiy maktab · 2024 yildan faoliyat ko'rsatmoqda</div>
+            <div>{"Grades 5–11 · Xususiy maktab · 2024 yildan faoliyat ko'rsatmoqda"}</div>
           </div>
         </div>
 
@@ -204,12 +179,6 @@ export const Footer: React.FC = () => {
             transform: translateY(-2px);
           }
         `}</style>
-      </footer>
-
-      <ApplicationModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
-      />
-    </>
+    </footer>
   );
 };

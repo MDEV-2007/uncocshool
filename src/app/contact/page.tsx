@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { 
-  MapPin, 
-  Phone, 
-  Send, 
-  Clock, 
-  ExternalLink, 
-  CheckCircle2, 
-  MessageSquare, 
-  ShieldCheck, 
+import {
+  MapPin,
+  Phone,
+  Send,
+  Clock,
+  ExternalLink,
+  MessageSquare,
+  ShieldCheck,
   Navigation,
   Sparkles
 } from 'lucide-react';
@@ -19,17 +18,6 @@ import { useTranslation } from '@/context/LanguageContext';
 
 export default function ContactPage() {
   const { t } = useTranslation();
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    message: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
 
   const mapQuery = encodeURIComponent("Obod Yurt Street 870, Ibrat, Buvayda District, Fergana, Uzbekistan");
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
@@ -64,15 +52,14 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 2. CONTACT DETAILS & FORM */}
-      <section className="section">
+      {/* 2. CONTACT DETAILS */}
+      <section id="contact-info" className="section" style={{ scrollMarginTop: '96px' }}>
         <div className="container">
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: 'clamp(28px, 4vw, 48px)',
-              alignItems: 'start'
+              maxWidth: '640px',
+              margin: '0 auto',
+              textAlign: 'center'
             }}
           >
             {/* Contact details */}
@@ -84,7 +71,7 @@ export default function ContactPage() {
                 {t('contact.hero.title') || "Biz doim aloqadamiz"}
               </h2>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'left' }}>
                 {/* Address Card */}
                 <div className="card" style={{ display: 'flex', gap: '18px', alignItems: 'flex-start' }}>
                   <div className="icon-badge">
@@ -184,90 +171,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Direct Feedback / Message Form */}
-            <div className="card" style={{ padding: 'clamp(28px, 4vw, 40px)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                <div className="icon-badge" style={{ width: '42px', height: '42px', borderRadius: '12px' }}>
-                  <Send size={20} strokeWidth={2.2} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '1.35rem', margin: 0 }}>
-                    {t('contact.form.title') || "Xabar qoldiring"}
-                  </h3>
-                </div>
-              </div>
-
-              <p style={{ color: 'var(--gray-700)', fontSize: '0.92rem', marginBottom: '24px' }}>
-                {t('contact.form.notice') || "Xabar qoldiring, maktab mas'ullari siz bilan bog'lanishadi."}
-              </p>
-
-              {submitted ? (
-                <div style={{ textAlign: 'center', padding: '36px 12px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
-                    <div className="icon-badge icon-badge-lg" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10B981', borderColor: 'rgba(16, 185, 129, 0.25)' }}>
-                      <CheckCircle2 size={32} />
-                    </div>
-                  </div>
-                  <h4 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>
-                    {t('contact.form.alert') || "Xabaringiz qabul qilindi!"}
-                  </h4>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit}>
-                  <div className="form-field">
-                    <label>{t('contact.form.name') || "Ismingiz *"} </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder={t('contact.form.namePlaceholder') || "Ismingiz"}
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <label>{t('contact.phone.title') || "Telefon *"} </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+998 90 123 45 67"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <label>{t('contact.form.message') || "Xabar *"}</label>
-                    <textarea
-                      rows={4}
-                      required
-                      placeholder={t('contact.form.messagePlaceholder') || "Xabaringizni yozing..."}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    style={{ 
-                      width: '100%', 
-                      marginTop: '8px', 
-                      padding: '14px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      fontSize: '0.96rem'
-                    }}
-                  >
-                    <Send size={16} />
-                    <span>{t('contact.form.submit') || "Xabarni yuborish"}</span>
-                  </button>
-                </form>
-              )}
             </div>
           </div>
         </div>

@@ -54,7 +54,7 @@ export const SCHOOL_DATA = {
   social: {
     telegram: "https://t.me/unco_school",
     instagram: "https://instagram.com/unco_school",
-    phone: "+998 93 649 59 79",
+    phone: "+998 93 140 11 22",
     email: "info@uncoschool.uz"
   },
   facilities: [

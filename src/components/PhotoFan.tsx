@@ -35,7 +35,6 @@ export const PhotoFan: React.FC<PhotoFanProps> = ({ items, onPlay }) => {
   const hoverLeft = 100 - itemW - 2; // shared slid-out destination (%)
 
   const activeItem = items[activeIndex] || items[0];
-  const activeTitle = activeItem.titleKey ? t(activeItem.titleKey) : "";
   const activeTag = activeItem.tagKey ? t(activeItem.tagKey) : "";
   const activeDesc = activeItem.descriptionKey 
     ? t(activeItem.descriptionKey) 

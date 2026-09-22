@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { X, ZoomIn, Award } from 'lucide-react';
+import { X, Award } from 'lucide-react';
 
 interface ImageModalProps {
   src: string | null;

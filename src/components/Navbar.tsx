@@ -4,16 +4,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/context/LanguageContext';
-import { Sparkles, ArrowRight } from 'lucide-react';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { ApplicationModal } from './ApplicationModal';
 
 export const Navbar: React.FC = () => {
   const { t } = useTranslation();
   const pathname = usePathname();
   const [isSolid, setIsSolid] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,16 +26,16 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on page navigate
-  useEffect(() => {
+  // Close mobile menu on page navigate (adjust state during render, avoiding an extra effect-triggered render)
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   const navLinks = [
     { href: '/', label: t('nav.home') || 'Bosh sahifa' },
     { href: '/about', label: t('nav.about') || 'Maktab haqida' },
     { href: '/academics', label: t('nav.academics') || 'Yo\'nalishlar' },
-    { href: '/teachers', label: t('nav.teachers') || 'O\'qituvchilar' },
     { href: '/student-life', label: t('nav.studentlife') || 'Maktab hayoti' },
     { href: '/achievements', label: t('nav.achievements') || 'Yutuqlar' },
     { href: '/admissions', label: t('nav.admissions') || 'Qabul' },
@@ -147,19 +145,9 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Actions: Lang switcher + Admissions CTA + Mobile Hamburger */}
+          {/* Actions: Lang switcher + Mobile Hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <LanguageSwitcher />
-
-            <button
-              type="button"
-              onClick={() => setApplyModalOpen(true)}
-              className="btn btn-primary btn-sm desktop-apply-btn"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-            >
-              <Sparkles size={14} />
-              <span>{t('header.admissionsBtn') || 'Qabul 2025'}</span>
-            </button>
 
             {/* Mobile Hamburger Toggle */}
             <button
@@ -262,28 +250,8 @@ export const Navbar: React.FC = () => {
               );
             })}
           </nav>
-
-          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                setApplyModalOpen(true);
-              }}
-              className="btn btn-primary"
-              style={{ width: '100%', padding: '14px' }}
-            >
-              {t('header.admissionsBtn') || 'Qabul 2025 — Ariza qoldirish'}
-            </button>
-          </div>
         </div>
       )}
-
-      {/* Application Modal */}
-      <ApplicationModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
-      />
 
       <style jsx global>{`
         @media (max-width: 1120px) {
@@ -292,9 +260,6 @@ export const Navbar: React.FC = () => {
           }
           .mobile-toggle-btn {
             display: flex !important;
-          }
-          .desktop-apply-btn {
-            display: none !important;
           }
         }
       `}</style>

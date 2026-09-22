@@ -3,25 +3,21 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
-  Sparkles, 
+  Sparkles,
   ArrowRight,
   Camera,
   Play,
-  Compass,
-  Mountain,
-  Smile
+  Mountain
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
 import { STUDENT_LIFE_GAMES, STUDENT_LIFE_CAMPUS } from '@/data/mediaData';
 import { MediaCard } from '@/components/MediaCard';
 import { PhotoFan } from '@/components/PhotoFan';
 import { VideoModal } from '@/components/VideoModal';
-import { ApplicationModal } from '@/components/ApplicationModal';
 
 export default function StudentLifePage() {
   const { t } = useTranslation();
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
 
   return (
     <>
@@ -243,15 +239,6 @@ export default function StudentLifePage() {
                 <span>{t('studentlife.cta.btn1') || "Yutuqlarni ko'rish"}</span>
                 <ArrowRight size={16} />
               </Link>
-              <button
-                type="button"
-                onClick={() => setApplyModalOpen(true)}
-                className="btn btn-primary"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-              >
-                <Sparkles size={16} />
-                <span>{t('studentlife.cta.btn2') || "Qabul 2025"}</span>
-              </button>
             </div>
           </div>
         </div>
@@ -262,12 +249,6 @@ export default function StudentLifePage() {
         src={activeVideo?.src || null}
         title={activeVideo?.title}
         onClose={() => setActiveVideo(null)}
-      />
-
-      {/* Online Application Modal */}
-      <ApplicationModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
       />
     </>
   );

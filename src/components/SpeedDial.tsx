@@ -1,21 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { 
-  Phone, 
-  Send, 
-  FileText, 
-  X, 
-  MessageCircle, 
-  Sparkles
+import {
+  Phone,
+  Send,
+  X,
+  MessageCircle
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
-import { ApplicationModal } from '@/components/ApplicationModal';
 
 export const SpeedDial: React.FC = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Close speed dial on Escape key
   useEffect(() => {
@@ -27,11 +23,6 @@ export const SpeedDial: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-
-  const handleOpenApplication = () => {
-    setIsOpen(false);
-    setIsModalOpen(true);
-  };
 
   return (
     <>
@@ -177,56 +168,6 @@ export const SpeedDial: React.FC = () => {
               <Send size={20} />
             </div>
           </a>
-
-          {/* Option 3: Quick Application Modal */}
-          <button
-            type="button"
-            onClick={handleOpenApplication}
-            className="speed-dial-action"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              border: 'none',
-              background: 'transparent',
-              cursor: 'pointer',
-              padding: 0
-            }}
-          >
-            <span
-              className="speed-dial-label"
-              style={{
-                backgroundColor: '#ffffff',
-                color: 'var(--ink)',
-                fontSize: '0.85rem',
-                fontWeight: 700,
-                padding: '6px 14px',
-                borderRadius: '999px',
-                boxShadow: '0 8px 24px rgba(5, 8, 38, 0.16)',
-                border: '1px solid var(--gray-200)',
-                whiteSpace: 'nowrap'
-              }}
-            >
-              📝 {t('speeddial.apply') || "Tezkor ariza qoldirish"}
-            </span>
-            <div
-              style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%)',
-                color: 'var(--blue-900)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 10px 24px -4px rgba(229, 169, 59, 0.5)',
-                transition: 'transform 0.2s ease'
-              }}
-              className="action-btn"
-            >
-              <FileText size={20} />
-            </div>
-          </button>
         </div>
 
         {/* Main Floating Trigger Button */}
@@ -280,12 +221,6 @@ export const SpeedDial: React.FC = () => {
           </div>
         </button>
       </aside>
-
-      {/* Online Application Modal */}
-      <ApplicationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
 
       <style jsx>{`
         .speed-dial-main-btn:hover {

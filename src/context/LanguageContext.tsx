@@ -15,18 +15,21 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>('uz');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Intentional: hydrate language from localStorage only after mount so the
+    // statically-exported HTML (always 'uz') matches the client's first render,
+    // then switch once we know the visitor's saved preference. Reading this in
+    // a useState initializer instead would cause a hydration mismatch.
     try {
       const saved = localStorage.getItem('unco_lang') as Language;
       if (saved && (saved === 'uz' || saved === 'ru' || saved === 'en')) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLanguageState(saved);
       }
     } catch {
       // localStorage unavailable or SSR
     }
-    setMounted(true);
   }, []);
 
   const setLanguage = (lang: Language) => {

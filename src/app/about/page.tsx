@@ -2,15 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-  School, 
-  ShieldCheck, 
-  Users, 
-  Target, 
-  BookOpen, 
-  Sparkles, 
-  Coffee, 
-  Activity, 
+import {
+  School,
+  ShieldCheck,
+  Target,
+  BookOpen,
+  Sparkles,
+  Activity,
   Laptop,
   CheckCircle2,
   Award,
@@ -23,7 +21,6 @@ import {
   ZoomIn
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
-import { SCHOOL_DATA } from '@/data/schoolData';
 import { MediaCard } from '@/components/MediaCard';
 import { VideoModal } from '@/components/VideoModal';
 import { ImageModal } from '@/components/ImageModal';

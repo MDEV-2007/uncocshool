@@ -1,27 +1,21 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { 
-  FileEdit, 
-  UserCheck, 
-  GraduationCap, 
-  CreditCard, 
-  Award, 
-  Sparkles, 
-  Lightbulb, 
-  Trophy, 
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2
+import {
+  FileEdit,
+  UserCheck,
+  GraduationCap,
+  CreditCard,
+  Award,
+  Sparkles,
+  Lightbulb,
+  Trophy
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
-import { SCHOOL_DATA } from '@/data/schoolData';
-import { ApplicationModal } from '@/components/ApplicationModal';
 
 export default function AdmissionsPage() {
   const { t } = useTranslation();
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
 
   const steps = [
     {
@@ -225,41 +219,8 @@ export default function AdmissionsPage() {
               </div>
             </div>
           </div>
-
-          {/* Action Box */}
-          <div
-            style={{
-              textAlign: 'center',
-              padding: 'clamp(36px, 6vw, 64px)',
-              borderRadius: 'var(--radius-l)',
-              background: 'linear-gradient(145deg, var(--blue-900) 0%, var(--blue) 100%)',
-              color: '#ffffff',
-              boxShadow: '0 30px 60px -20px rgba(22, 47, 216, 0.4)'
-            }}
-          >
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: '#fff', marginBottom: '14px' }}>
-              {t('admissions.cta.title') || "Maktab kansellyariyasi bilan bog'laning"}
-            </h2>
-            <p style={{ color: '#D4DAFB', fontSize: '1.05rem', maxWidth: '580px', margin: '0 auto 28px' }}>
-              {t('admissions.cta.lede') || "Savollaringiz bormi? Ro'yxatdan o'tish uchun quyidagi tugmani bosing yoki to'g'ridan-to'g'ri aloqaga chiqing."}
-            </p>
-            <button
-              type="button"
-              onClick={() => setApplyModalOpen(true)}
-              className="btn btn-ghost-light"
-              style={{ padding: '16px 36px', fontSize: '1.05rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-            >
-              <span>{t('header.admissionsBtn') || "Onlayn ariza qoldirish"}</span>
-              <ArrowRight size={18} />
-            </button>
-          </div>
         </div>
       </section>
-
-      <ApplicationModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
-      />
     </>
   );
 }

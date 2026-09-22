@@ -2,21 +2,17 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-  Trophy, 
-  Award, 
-  Sparkles, 
-  Play, 
-  GraduationCap, 
-  Star, 
-  CheckCircle2, 
-  Calendar, 
+import {
+  Trophy,
+  Award,
+  Sparkles,
+  Play,
+  GraduationCap,
+  CheckCircle2,
+  Calendar,
   ArrowRight,
   ZoomIn,
-  BookOpen,
-  Layers,
-  FileCheck,
-  Search
+  FileCheck
 } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
 import { 
@@ -30,13 +26,11 @@ import { MediaCard } from '@/components/MediaCard';
 import { PhotoFan } from '@/components/PhotoFan';
 import { VideoModal } from '@/components/VideoModal';
 import { ImageModal } from '@/components/ImageModal';
-import { ApplicationModal } from '@/components/ApplicationModal';
 
 export default function AchievementsPage() {
   const { t } = useTranslation();
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
   const [activeImage, setActiveImage] = useState<{ src: string; title: string; subtitle?: string; badge?: string } | null>(null);
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
 
   return (
     <>
@@ -652,27 +646,18 @@ export default function AchievementsPage() {
                 <span>{t('achievements.cta.eyebrow') || "Keyingi bitiruvchilar safida bo'lishga tayyormisiz?"}</span>
               </span>
               <h2 className="display" style={{ color: '#fff', marginTop: '8px' }}>
-                {t('achievements.cta.title') || "Qabul arizasini topshiring"}
+                {t('achievements.cta.title') || "Biz bilan bog'laning"}
               </h2>
             </div>
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="btn btn-ghost-light"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               >
                 <span>{t('achievements.cta.btn2') || "Aloqa"}</span>
                 <ArrowRight size={16} />
               </Link>
-              <button
-                type="button"
-                onClick={() => setApplyModalOpen(true)}
-                className="btn btn-primary"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-              >
-                <Sparkles size={16} />
-                <span>{t('achievements.cta.btn1') || "Qabul 2025"}</span>
-              </button>
             </div>
           </div>
         </div>
@@ -692,12 +677,6 @@ export default function AchievementsPage() {
         subtitle={activeImage?.subtitle}
         badge={activeImage?.badge}
         onClose={() => setActiveImage(null)}
-      />
-
-      {/* Online Application Modal */}
-      <ApplicationModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
       />
 
       <style jsx>{`
